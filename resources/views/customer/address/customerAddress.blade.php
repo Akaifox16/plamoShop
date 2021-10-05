@@ -34,22 +34,22 @@
         <tr>
             <td>
                 @if ($address->selected == 1)
-                <input type="radio" name="addrNo" value='{{$address->addressNo}}' checked="checked">
+                <input type="radio" name="addrNo" value='{{$address->AddressNo}}' checked="checked">
                 @else
-                <input type="radio" name="addrNo" value='{{$address->addressNo}}'>
+                <input type="radio" name="addrNo" value='{{$address->AddressNo}}'>
                 @endif
             </td>
-            <td> {{$address->addressNo}} </td>
+            <td> {{$address->AddressNo}} </td>
             <td>
-                <p>{{$address->addressLine1}}</p>
-                <p>{{$address->addressLine2}}</p>
+                <p>{{$address->AddressLine1}}</p>
+                <p>{{$address->AddressLine2}}</p>
             </td>
-            <td> {{$address->city}} </td>
-            <td> {{$address->state}} </td>
-            <td> {{$address->postalCode}} </td>
-            <td> {{$address->country}} </td>
-            <td> <a href="/edit-address/{{$address->customerID}}/{{$address->addressNo}}">edit</a> </td>
-            <td><form action="/delete-address/{{$address->customerID}}/{{$address->addressNo}}" method="post">
+            <td> {{$address->City}} </td>
+            <td> {{$address->State}} </td>
+            <td> {{$address->PostalCode}} </td>
+            <td> {{$address->Country}} </td>
+            <td> <a href="/edit-address/{{$address->CustomerID}}/{{$address->AddressNo}}">edit</a> </td>
+            <td><form action="/delete-address/{{$address->CustomerID}}/{{$address->AddressNo}}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <a href="#" onclick="event.preventDefault();this.parentNode.submit()">del</a>
                 </form> 
@@ -58,14 +58,14 @@
 
         @endforeach
         <tr>
-            <td> <a href="">save</a> </td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td> <a href="/add-address/{{$addresses[0]->customerID}}/">add new</a> </td>
+            <td></td>
+            <td> <a href="/add-address/{{$addresses[0]->CustomerID}}/">add new</a> </td>
             <td><a href="/customer-list">Back</a></td>
         </tr>
     </table>

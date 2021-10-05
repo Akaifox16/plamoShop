@@ -106,7 +106,7 @@ class employeeServiceController extends Controller
                 if($selected == 1 && $i == 1){
                     DB::table('customerAddresses')
                     ->where('customerID',$id)
-                    ->where('addressNo',$address->addressNo)
+                    ->where('addressNo',$address->AddressNo)
                     ->update([
                         "addressNo" => $i,
                         "selected" => 1,
@@ -114,7 +114,7 @@ class employeeServiceController extends Controller
                 }else{
                     DB::table('customerAddresses')
                     ->where('customerID',$id)
-                    ->where('addressNo',$address->addressNo)
+                    ->where('addressNo',$address->AddressNo)
                     ->update([
                         "addressNo" => $i,
                     ]);
