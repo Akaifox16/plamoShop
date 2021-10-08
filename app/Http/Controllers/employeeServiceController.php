@@ -15,7 +15,7 @@ class employeeServiceController extends Controller
         ->get([ 'customerNumber','customerName',
             'contactLastName','contactFirstName',
             'phone','creditLimit']);
-        return $customers;
+        return response($customers,200);
     }
 
     public function getAddresses($id){
@@ -26,7 +26,7 @@ class employeeServiceController extends Controller
         ->where('customerNumber',$id)
         ->select('customerName','customerNumber')
         ->get();
-        return ['addresses'=>$addresses, 'customer'=>$customer[0]];
+        return response(['addresses'=>$addresses, 'customer'=>$customer[0]],200);
     }
     
     public function createNewAddr(addressReq $req){
@@ -43,18 +43,17 @@ class employeeServiceController extends Controller
                 "postalCode" => $validated['postCode'],
                 "country" => $validated['country']
             ]);
-            return redirect("/add-address/{$validated['customerID']}")->with('status',"Insert successfully");
+            return response(['success'=> true ,'data' => "Insert successfully"],201);
         }catch(Exception $e){
-            return redirect("/add-address/{$validated['customerID']}")->with('failed',"operation failed");
+            return response(['success'=> false,'error' => "operation failed"],422);
         }
     }
     
-    public function getAddress($id){
+    public function countAddress($id){
         $count = DB::table('customerAddresses')
         ->where('customerID',$id)
         ->count()+1;
-        $cid = $id;
-        return view('customer.address.option.addAddress',['count'=>$count,'cid'=>$cid]);
+        return response(['no'=>$count],200);
     }
 
     public function editAddr(addressReq $req){

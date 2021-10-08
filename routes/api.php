@@ -27,15 +27,6 @@ Route::get('/create-customer-account',function(){
 Route::get('/create-customer-order',function(){
     return view('createCustomerOrder');
 });
-Route::get('/catalog',function(){
-    return view('catalog');
-});
-
-// #Customer service routing
-Route::get('/get-selaerep/{id}',[customerServiceController::class,
-'getselaeRepByEmployee']);
-Route::get('/get-totalPrice/{id}',[customerServiceController::class,
-'getTotalEachOrderByCustomer']);
 
 // #Employee service routing
 // #address group
@@ -44,7 +35,7 @@ Route::get('/customer-list',[employeeServiceController::class,
 Route::get('/customer-address/{id}',[employeeServiceController::class,
 'getAddresses']);
 Route::get('/add-address/{id}',[employeeServiceController::class,
-'getAddress']);
+'countAddress']);
 Route::post('/add-address',[employeeServiceController::class,
 'createNewAddr']);
 Route::get('/edit-address/{id}/{no}',[employeeServiceController::class,
