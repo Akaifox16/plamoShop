@@ -10,23 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class employeeServiceController extends Controller
 {
-    public function getCustomerListView(){
+    public function getCustomerList(){
         $customers = DB::table('customers')
         ->get([ 'customerNumber','customerName',
             'contactLastName','contactFirstName',
             'phone','creditLimit']);
-        return view('customer.customer',['customers'=>$customers]);
+        return $customers;
     }
 
-    public function getAddressesView($id){
+    public function getAddresses($id){
         $addresses = DB::table('customerAddresses')
         ->where('customerID',$id)
         ->get();
         $customer = DB::table('customers')
         ->where('customerNumber',$id)
-        ->select('customerName')
+        ->select('customerName','customerNumber')
         ->get();
-        return view('customer.address.customerAddress',['addresses'=>$addresses, 'customer'=>$customer]);
+        return ['addresses'=>$addresses, 'customer'=>$customer[0]];
     }
     
     public function createNewAddr(addressReq $req){
@@ -49,7 +49,7 @@ class employeeServiceController extends Controller
         }
     }
     
-    public function getAddressView($id){
+    public function getAddress($id){
         $count = DB::table('customerAddresses')
         ->where('customerID',$id)
         ->count()+1;
@@ -82,7 +82,7 @@ class employeeServiceController extends Controller
         }
     }
 
-    public function getEditAddrView($id,$no){
+    public function getEditAddr($id,$no){
         $addresses = DB::table('customerAddresses')
         ->where('customerID',$id)
         ->where('addressNo',$no)
