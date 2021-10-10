@@ -15,4 +15,10 @@ class orders extends Model
         'status','comments',
         'customerNumber'
     ];
+    protected $primaryKey = 'orderNumber';
+
+    public function customer()
+    {
+        return $this->belongsTo(customers::class,'customerNumber','customerNumber');
+    }
 }

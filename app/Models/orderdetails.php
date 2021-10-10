@@ -9,9 +9,4 @@ class orderdetails extends Model
 {
     use HasFactory;
     protected $table = "orderdetails";
-    protected $fillavble = [
-        'orderNumber','productCode',
-        'quantityOrdered','priceEach',
-        'orderLineNumber'
-    ];
 }

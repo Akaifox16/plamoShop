@@ -14,8 +14,19 @@ class customers extends Model
         'customerName','contactLastName','contactFirstName',
         'phone'
     ];
+    protected $primaryKey = 'customerNumber';
     
-    public function address(){
-        return $this->hasMany('/app/customeraddresses');
+    public function addresses(){
+        return $this->hasMany(customeraddresses::class,'CustomerID');
+    }
+    public function payments(){
+        return $this->hasMany(payments::class,'customerNumber');
+    }
+    public function orders(){
+        return $this->hasMany(orders::class,'customerNumber');
+    }
+    public function saleRepEmployee()
+    {
+        return $this->belongsTo(employees::class,'employeeNumber','salesRepEmployeeNumber');
     }
 }

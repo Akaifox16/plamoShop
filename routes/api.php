@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\employeeServiceController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,25 +32,25 @@ Route::get('/create-customer-order',function(){
 
 // #Employee service routing
 // #address group
-Route::get('/customer-list',[employeeServiceController::class,
-'getCustomerList']);
-Route::get('/customer-address/{id}',[employeeServiceController::class,
-'getAddresses']);
-Route::get('/count-address/{id}',[employeeServiceController::class,
-'countAddress']);
-Route::post('/add-address',[employeeServiceController::class,
-'createNewAddr']);
-Route::get('/edit-address/{id}/{no}',[employeeServiceController::class,
-'getEditAddr']);
-Route::post('/edit-address/{id}/{no}',[employeeServiceController::class,
-'editAddr']);
-Route::delete('/delete-address/{id}/{no}',[employeeServiceController::class,
-'delAddr']);
+Route::get('/address/{id}',[AddressController::class,
+'get']);
+Route::get('/count/{id}',[AddressController::class,
+'count']);
+Route::post('/create/address',[AddressController::class,
+'create']);
+Route::get('/edit/address/{id}/{no}',[AddressController::class,
+'getAddressNo']);
+Route::post('/edit/address/{id}/{no}',[AddressController::class,
+'edit']);
+Route::delete('/del/address/{id}/{no}',[AddressController::class,
+'del']);
 // #order group
-Route::post('/create-customerOrder/{id}',[employeeServiceController::class,
-'createCustomerOrder']);
-Route::post('/update-customerOrder/{oid}',[employeeServiceController::class,
-'updateCustomerOrder']);
+Route::post('/create/order/{id}',[OrderController::class,
+'create']);
+Route::put('/update/order/{oid}',[OrderController::class,
+'update']);
 // #account mange group
-Route::post('/create-customerAccount/{id}',[employeeServiceController::class,
-'createCustomerAccount']);
+Route::get('/customers',[employeeServiceController::class,
+'get']);
+Route::post('/create/customer/{id}',[employeeServiceController::class,
+'create']);

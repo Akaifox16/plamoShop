@@ -9,4 +9,10 @@ class offices extends Model
 {
     use HasFactory;
     protected $table = "offices";
+    protected $primaryKey = 'officeCode';
+
+    public function employees()
+    {
+        return $this->hasMany(employees::class,'officeCode');
+    }
 }

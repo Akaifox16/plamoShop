@@ -10,14 +10,11 @@ class customeraddresses extends Model
     use HasFactory;
     protected $table = "customerAddresses";
     protected $fillable = [
-        'customerID',
         'addressLine1','addressLine2',
         'addressNo',
         'selected',
         'city','state','postalCode','country'
     ];
-    
-    public function customerID(){
-        return $this->belongsTo('\app\customers');
-    }
+    protected $primaryKey = 'addressNo';
+
 }

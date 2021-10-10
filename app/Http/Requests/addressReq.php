@@ -28,10 +28,10 @@ class addressReq extends FormRequest
             'addressNo'=>'required',
             'addressLine1'=>'required|string|min:3|max:255',
             'addressLine2'=>'max:255',
-            'city'=>'required|string|min:3|max:255',
-            'state'=>'required|string|min:3|max:255',
-            'postCode'=>'required|string|min:3|max:255',
-            'country'=>'required|string|min:3|max:255',
+            'city'=>'required|string|min:2|max:255',
+            'state'=>'max:255',
+            'postCode'=>'max:255',
+            'country'=>'required|string|min:2|max:255',
         ];
     }
 
@@ -44,8 +44,6 @@ class addressReq extends FormRequest
         return [
             'addressLine1.required'=>'line 1 is required',
             'city.required'=>'city is required',
-            'state.required'=>'state is required',
-            'postCode.required'=>'postCode is required',
             'country.required'=>'country is required',
         ];
     }

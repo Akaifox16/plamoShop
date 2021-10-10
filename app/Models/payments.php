@@ -9,10 +9,4 @@ class payments extends Model
 {
     use HasFactory;
     protected $table = "payments";
-    protected $fillable = [
-        'customerNumber',
-        'checkNumber',
-        'paymentDate',
-        'amount'
-    ];
 }
