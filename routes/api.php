@@ -34,7 +34,7 @@ Route::get('/customer-list',[employeeServiceController::class,
 'getCustomerList']);
 Route::get('/customer-address/{id}',[employeeServiceController::class,
 'getAddresses']);
-Route::get('/add-address/{id}',[employeeServiceController::class,
+Route::get('/count-address/{id}',[employeeServiceController::class,
 'countAddress']);
 Route::post('/add-address',[employeeServiceController::class,
 'createNewAddr']);
