@@ -17,7 +17,7 @@ class customers extends Model
     protected $primaryKey = 'customerNumber';
     
     public function addresses(){
-        return $this->hasMany(customeraddresses::class,'CustomerID');
+        return $this->hasMany(customeraddresses::class,'customerID');
     }
     public function payments(){
         return $this->hasMany(payments::class,'customerNumber');

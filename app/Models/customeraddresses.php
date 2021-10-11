@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class customeraddresses extends Model
 {
     use HasFactory;
-    protected $table = "customerAddresses";
+    protected $table = "customeraddresses";
     protected $fillable = [
         'addressLine1','addressLine2',
         'addressNo',
-        'selected',
         'city','state','postalCode','country'
     ];
-    protected $primaryKey = 'addressNo';
+    protected $primaryKey = 'id';
 
+    public function customer(){
+        return $this->belongsTo(customers::class,'customerID','customerNumber');
+    }
 }

@@ -21,28 +21,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/customer-list',[employeeServiceController::class,
-'getCustomerList']);
-Route::get('/create-customer-account',function(){
-    return view('createMemberAccount');
-});
-Route::get('/create-customer-order',function(){
-    return view('createCustomerOrder');
-});
-
 // #Employee service routing
 // #address group
-Route::get('/address/{id}',[AddressController::class,
+Route::get('/address/{cid}',[AddressController::class,
 'get']);
-Route::get('/count/{id}',[AddressController::class,
+Route::get('/count/{cid}',[AddressController::class,
 'count']);
 Route::post('/create/address',[AddressController::class,
 'create']);
-Route::get('/edit/address/{id}/{no}',[AddressController::class,
-'getAddressNo']);
-Route::post('/edit/address/{id}/{no}',[AddressController::class,
+Route::get('/edit/address/{id}',[AddressController::class,
+'getAddress']);
+Route::patch('/edit/address/{id}',[AddressController::class,
 'edit']);
-Route::delete('/del/address/{id}/{no}',[AddressController::class,
+Route::delete('/del/address/{id}',[AddressController::class,
 'del']);
 // #order group
 Route::post('/create/order/{id}',[OrderController::class,
