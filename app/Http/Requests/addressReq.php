@@ -24,8 +24,10 @@ class addressReq extends FormRequest
     public function rules()
     {
         return [
+            'customerID'=>'max:11',
             'addressLine1'=>'required|string|min:3|max:50',
             'addressLine2'=>'max:50',
+            'addressNo'=>'max:11',
             'city'=>'required|string|min:2|max:50',
             'state'=>'max:50',
             'postCode'=>'max:15',

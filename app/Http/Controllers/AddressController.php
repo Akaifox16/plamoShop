@@ -59,14 +59,14 @@ class AddressController extends Controller
         if($req->accepts('application/json')){
             $validated = $req->validated();
             try {
-                customeraddresses::where('id',$id)
+                DB::table('customeraddresses')->where('id',$id)
                 ->update([
                     'addressLine1' => $validated['addressLine1'],
                     'addressLine2' => $validated['addressLine2'],
                     'city'         => $validated['city'],
                     'state'        => $validated['state'],
                     'postalCode'   => $validated['postCode'],
-                    'country'      => $validated['country']
+                    'country'      => $validated['country'],
                 ]);
                 return response(['success'=> true, 'data' => $validated],200);
             } catch (Exception $e) {
