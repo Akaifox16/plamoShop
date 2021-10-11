@@ -44,16 +44,16 @@ class AddressController extends Controller
         }
     }
     
-    /**Count all all address of customer[$cid]
-     * @return no number of customer's addresses
+    /** Count all all address of customer[$cid]
+     *  @return no number of customer's addresses
      */
     public function count($cid){
         $count = customers::find($cid)->addresses->count()+1;
         return response(['no'=>$count],200);
     }
 
-    /**edit customer's address with req data and addressNo
-     * @return data changed data of address
+    /** edit customer's address with req data and addressNo
+     *  @return data changed data of address
      */
     public function edit(addressReq $req,$id){
         if($req->accepts('application/json')){
