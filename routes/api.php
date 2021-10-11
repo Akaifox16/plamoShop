@@ -21,27 +21,38 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// #Employee service routing
-// #address group
-Route::get('/address/{cid}',[AddressController::class,
-'get']);
-Route::get('/count/{cid}',[AddressController::class,
-'count']);
-Route::post('/create/address',[AddressController::class,
-'create']);
-Route::get('/edit/address/{id}',[AddressController::class,
-'getAddress']);
-Route::patch('/edit/address/{id}',[AddressController::class,
-'edit']);
-Route::delete('/del/address/{id}',[AddressController::class,
-'del']);
-// #order group
-Route::post('/create/order/{id}',[OrderController::class,
-'create']);
-Route::put('/update/order/{oid}',[OrderController::class,
-'update']);
-// #account mange group
+// routing path {localhost}/api/address/.
+Route::prefix('address')->group(function ()
+{
+    Route::get('/{cid}',[AddressController::class,
+    'get']);
+    Route::get('/count/{cid}',[AddressController::class,
+    'count']);
+    Route::get('/edit/{id}',[AddressController::class,
+    'getAddress']);
+    Route::post('/create',[AddressController::class,
+    'create']);
+    Route::patch('/edit/{id}',[AddressController::class,
+    'edit']);
+    Route::delete('/del/{id}',[AddressController::class,
+    'del']);    
+});
+
+// routing path {localhost}/api/order/.
+Route::prefix('order')->group(function ()
+{
+    Route::post('/create/{id}',[OrderController::class,
+    'create']);
+    Route::patch('/update/{oid}',[OrderController::class,
+    'update']);
+});
+
+// routing path {localhost}/api/customer/.
+Route::prefix('customer')->group(function ()
+{
+    Route::post('/customer/{id}',[employeeServiceController::class,
+    'create']);
+});
+
 Route::get('/customers',[employeeServiceController::class,
 'get']);
-Route::post('/create/customer/{id}',[employeeServiceController::class,
-'create']);

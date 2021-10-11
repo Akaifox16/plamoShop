@@ -10,6 +10,10 @@ use Exception;
 
 class AddressController extends Controller
 {
+    /** Get all customer's addresses
+     *  @return addresses compose of array of customer's addresses
+     *  @return customer composed of customer's name and customerNumber
+     */
     public function get($cid){
         $customers = customers::find($cid);
         $addresses = $customers->addresses()->get(['id','AddressLine1','AddressLine2','AddressNo',
@@ -18,6 +22,9 @@ class AddressController extends Controller
         return response(['addresses'=>$addresses, 'customer'=>$customer[0]],200);
     }
     
+    /** Create new record of customer's address
+     *  @return insert new address record 
+     */
     public function create(addressReq $req){
         $validated = $req->validated();
         try{
@@ -31,16 +38,23 @@ class AddressController extends Controller
                 "postalCode" => $validated['postCode'],
                 "country" => $validated['country']
             ]);
-            return response(['success'=> true ,'data' => "Insert successfully", 'inset' => $validated],201);
+            return response(['success'=> true ,'data' => "Insert successfully", 'insert' => $validated],201);
         }catch(Exception $e){
             return response(['success'=> false,'error' => "missing requirement"],422);
         }
     }
+    
+    /**Count all all address of customer[$cid]
+     * @return no number of customer's addresses
+     */
     public function count($cid){
         $count = customers::find($cid)->addresses->count()+1;
         return response(['no'=>$count],200);
     }
 
+    /**edit customer's address with req data and addressNo
+     * @return data changed data of address
+     */
     public function edit(addressReq $req,$id){
         if($req->accepts('application/json')){
             $validated = $req->validated();
@@ -62,11 +76,17 @@ class AddressController extends Controller
         return response(['success'=>false,'error'=> '[required]content-type: json'],204);
     }
 
+    /** Get address's data that want to update
+     *  @return address address record that want to change
+     */
     public function getAddress($id){
         $address = customeraddresses::find($id);
         return response(['address'=>$address],200);
     }
 
+    /** Delete address record that have the id = $id 
+     * @return data delete address record
+     */
     public function del($id){
         $count = customeraddresses::get()->count();
         if($count > 1){
