@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\employeeServiceController;
+use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,9 +51,15 @@ Route::prefix('order')->group(function ()
 // routing path {localhost}/api/customer/.
 Route::prefix('customer')->group(function ()
 {
-    Route::post('/customer/{id}',[employeeServiceController::class,
+    Route::post('/create/{id}',[employeeServiceController::class,
     'create']);
 });
 
+Route::post('/signup',[loginController::class,
+'signup']);
+Route::post('/login',[loginController::class,
+'login']);
+
 Route::get('/customers',[employeeServiceController::class,
 'get']);
+
