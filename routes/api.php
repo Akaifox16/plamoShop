@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\catalogController;
 use App\Http\Controllers\employeeServiceController;
-use App\Http\Controller\catalogController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
@@ -67,4 +67,4 @@ Route::get('/customers/{eid}',[employeeServiceController::class,
 'getByID']);
 
 
-Route::get('/catalog',[catalogController::class,'fillter']);
+Route::get('/catalog',[catalogController::class,'filter']);

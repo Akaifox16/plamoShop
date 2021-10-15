@@ -6,7 +6,6 @@ use App\Http\Requests\loginReq;
 use App\Models\employees;
 use App\Models\login;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class loginController extends Controller
