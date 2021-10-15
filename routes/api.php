@@ -62,4 +62,5 @@ Route::post('/login',[loginController::class,
 
 Route::get('/customers',[employeeServiceController::class,
 'get']);
-
+Route::get('/customers/{eid}',[employeeServiceController::class,
+'getByID']);
