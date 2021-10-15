@@ -5,6 +5,7 @@ use App\Http\Controllers\catalogController;
 use App\Http\Controllers\employeeServiceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\paymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -68,3 +69,5 @@ Route::get('/customers/{eid}',[employeeServiceController::class,
 
 
 Route::get('/catalog',[catalogController::class,'filter']);
+
+Route::post('/payment',[paymentController::class,'insert']);
