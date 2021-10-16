@@ -75,4 +75,4 @@ Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
-Route::post('/point',[customerServiceController::class,'point']);
+Route::post('/points',[customerServiceController::class,'points']);

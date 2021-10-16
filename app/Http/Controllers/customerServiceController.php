@@ -34,15 +34,17 @@ class customerServiceController extends Controller
         return $results;
     }
 
-    public function point(Reqpoint $req){
+    public function points(Reqpoint $req){
         $validated = $req->validated();
         try{
             $id = $validated['customerNumber'];
             $customer = customers::find($id);
             if(!is_null($customer)){
+                $point = DB::table('customers')->where('customerNumber',$id)->select('points')->get();
+                $total_point = $point[0] + $validated['points'];
                 DB::table('customers')->where('customerNumber',$id)
                 ->update([
-                    'points' => $validated['points']
+                    'points' => $total_point
                 ]);
                 return response(["success" => true, "message" => "Point added",]);
             }
