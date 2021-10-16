@@ -40,8 +40,8 @@ class customerServiceController extends Controller
             $id = $validated['customerNumber'];
             $customer = customers::find($id);
             if(!is_null($customer)){
-                $point = DB::table('customers')->where('customerNumber',$id)->select('points')->get();
-                $total_point = $point[0] + $validated['points'];
+                $point = $customer->points;
+                $total_point = $point + $validated['points'];
                 DB::table('customers')->where('customerNumber',$id)
                 ->update([
                     'points' => $total_point
