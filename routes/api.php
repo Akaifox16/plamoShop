@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\catalogController;
+use App\Http\Controllers\customerServiceController;
 use App\Http\Controllers\employeeServiceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
@@ -73,3 +74,5 @@ Route::get('/catalog',[catalogController::class,'filter']);
 Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
+
+Route::post('/point',[customerServiceController::class,'point']);
