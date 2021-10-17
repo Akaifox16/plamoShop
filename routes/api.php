@@ -67,6 +67,8 @@ Route::get('/customers',[employeeServiceController::class,
 'get']);
 Route::get('/employees',[employeeServiceController::class,
 'getEmployee']);
+Route::get('/employee/{id}',[employeeServiceController::class,
+'getEmployeeByID']);
 Route::get('/customers/{eid}',[employeeServiceController::class,
 'getByID']);
 

@@ -23,7 +23,12 @@ class employeeServiceController extends Controller
         $employees = employees::all();
         return $employees;
     }
-    
+
+    public function getEmployeeByID($id)
+    {
+        $employee = employees::find($id);
+        return $employee;
+    }
 
     public function getByID($eid){
         $customers = customers::where('salesRepEmployeeNumber',$eid)->get(['customerNumber','customerName',
