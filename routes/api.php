@@ -65,6 +65,8 @@ Route::post('/login',[loginController::class,
 
 Route::get('/customers',[employeeServiceController::class,
 'get']);
+Route::get('/employees',[employeeServiceController::class,
+'getEmployee']);
 Route::get('/customers/{eid}',[employeeServiceController::class,
 'getByID']);
 
@@ -76,3 +78,4 @@ Route::post('/payment',[paymentController::class,'insert']);
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
 Route::post('/points',[customerServiceController::class,'points']);
+

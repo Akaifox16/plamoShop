@@ -19,6 +19,11 @@ class employeeServiceController extends Controller
         return response($customers,200);
     }
 
+    public function getEmployee(){
+        $employees = employees::all();
+        return $employees;
+    }
+
     public function getByID($eid){
         $customers = customers::where('salesRepEmployeeNumber',$eid)->get(['customerNumber','customerName',
         'contactLastName','contactFirstName',
