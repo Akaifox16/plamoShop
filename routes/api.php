@@ -7,6 +7,7 @@ use App\Http\Controllers\employeeServiceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\stockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +84,6 @@ Route::post('/promote',[employeeServiceController::class,'promote']);
 
 Route::post('/points',[customerServiceController::class,'points']);
 
+//stock access api
+
+Route::get('/stocks',[stockController::class,'get']);
