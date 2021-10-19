@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function get($cid){
+        $orders = orders::where('customerNumber',$cid)->get();
+        return response(['orders'=>$orders]);
+    }
+
     public function create(Request $request, $id){
         DB::table('orders')->insert([ 
             'orderNumber'   => $request->input('orderNumber'),

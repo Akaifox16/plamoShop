@@ -45,6 +45,8 @@ Route::prefix('address')->group(function ()
 // routing path {localhost}/api/order/.
 Route::prefix('order')->group(function ()
 {
+    Route::get('/{cid}',[OrderController::class,
+    'get']);
     Route::post('/create/{id}',[OrderController::class,
     'create']);
     Route::patch('/update/{oid}',[OrderController::class,
