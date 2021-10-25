@@ -33,11 +33,11 @@ Route::prefix('address')->group(function ()
     'get']);
     Route::get('/count/{cid}',[AddressController::class,
     'count']);
-    Route::get('/edit/{id}',[AddressController::class,
+    Route::get('/update/{id}',[AddressController::class,
     'getAddress']);
     Route::post('/create',[AddressController::class,
     'create']);
-    Route::patch('/edit/{id}',[AddressController::class,
+    Route::patch('/update/{id}',[AddressController::class,
     'edit']);
     Route::delete('/del/{id}',[AddressController::class,
     'del']);    
@@ -48,6 +48,8 @@ Route::prefix('order')->group(function ()
 {
     Route::get('/{cid}',[OrderController::class,
     'get']);
+    Route::get('/get-details/{id}',[OrderController::class,
+    'getDetails']);
     Route::post('/create/{id}',[OrderController::class,
     'create']);
     Route::patch('/update/{oid}',[OrderController::class,

@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function get($cid){
-        $orders = orders::where('customerNumber',$cid)->get();
+        $orders = orders::where('customerNumber',$cid)->get(['orderNumber','orderDate','requiredDate','shippedDate','status','comments','paymentNumber'])
+                    ;
         return response(['orders'=>$orders]);
+    }
+
+    public function getDetails($id){
+        $orderDetails = orders::find($id)->orderDetails()->get(['productCode','quantityOrdered','priceEach','orderLineNumber']);
+        return response(['orderDetails'=> $orderDetails]);
     }
 
     public function create(Request $request, $id){
