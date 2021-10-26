@@ -95,8 +95,12 @@ Route::post('/stock',[stockController::class,'create']);
 Route::get('/getstock',[stockController::class,
 'getstock']);
 
+Route::get('stock/count/{cid}',[stockController::class,
+'count']);
 
 Route::get('/stock/{id}',[stockController::class,
 'getstockByID']);
+
+
 
 
