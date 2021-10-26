@@ -54,6 +54,8 @@ Route::prefix('order')->group(function ()
     'create']);
     Route::patch('/update/{oid}',[OrderController::class,
     'update']);
+    Route::patch('/update-payment',[OrderController::class,
+    'updatePayment']);
 });
 
 // routing path {localhost}/api/customer/.

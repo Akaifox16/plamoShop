@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBonusPointsToCustomers extends Migration
+class EditStockInsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddBonusPointsToCustomers extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->integer('points')->default(0);
+        Schema::table('stock_ins', function (Blueprint $table) {
+            $table->dropForeign('stock_ins_productcode_foreign');
+            $table->dropPrimary('productCode');
         });
-        
     }
 
     /**
@@ -26,8 +26,5 @@ class AddBonusPointsToCustomers extends Migration
      */
     public function down()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            //
-        });
     }
 }
