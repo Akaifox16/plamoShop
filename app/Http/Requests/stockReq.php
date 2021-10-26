@@ -24,7 +24,7 @@ class stockReq extends FormRequest
     public function rules()
     {
         return [
-            'productCode'=>'max:8',
+            'productCode'=>'required',
             'qty'=>'required',
         ];
     }
