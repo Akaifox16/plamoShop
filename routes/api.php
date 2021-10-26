@@ -92,3 +92,5 @@ Route::get('/stock',[stockController::class,'get']);
 
 Route::post('/stock',[stockController::class,'create']);
 
+
+
