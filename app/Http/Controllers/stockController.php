@@ -13,6 +13,10 @@ class stockController extends Controller
         
         return response($stock);
     }
+    public function getstockin(){
+        $stock = stock_in::all();
+        return $stock;
+    }
 
     //public function() 
 }

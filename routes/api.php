@@ -88,4 +88,7 @@ Route::post('/points',[customerServiceController::class,'points']);
 
 //stock access api
 
-Route::get('/stocks',[stockController::class,'get']);
+Route::get('/stock',[stockController::class,'get']);
+
+Route::post('/stock',[stockController::class,'create']);
+
