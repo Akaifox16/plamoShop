@@ -10,8 +10,24 @@ use Illuminate\Support\Facades\DB;
 class stockController extends Controller
 {
     public function get(){
-        $stock = stock_in::all();
+        $stock = stock_in::get(
+            [ 'productCode','qty',
+            'created_at','update_at']);
         return $stock;
+    }
+    public function getstock(){
+        $results = DB::select(DB::raw("
+        SELECT  *
+        FROM    stock_in
+        "));
+        return $results;
+    }
+    public function getstockByID($id)
+    {
+        $stock = stock_in::where('productCode',$id)->get(
+            [ 'qty',
+            'created_at','updated_at']);
+        return response(['stock'=> $stock]);
     }
  
     public function create(stockReq $req){
