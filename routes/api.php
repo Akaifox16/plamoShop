@@ -7,6 +7,7 @@ use App\Http\Controllers\employeeServiceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\PreOrderController;
 use App\Http\Controllers\stockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -90,4 +91,19 @@ Route::post('/points',[customerServiceController::class,'points']);
 
 //stock access api
 
-Route::get('/stocks',[stockController::class,'get']);
+Route::get('/stock',[stockController::class,'get']);
+
+Route::post('/stock/create',[stockController::class,'create']);
+
+Route::get('/getstock',[stockController::class,
+'getstock']);
+
+Route::get('stock/count/{cid}',[stockController::class,
+'count']);
+
+Route::get('/stock/{id}',[stockController::class,
+'getstockByID']);
+
+Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
+
+
