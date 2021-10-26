@@ -7,6 +7,7 @@ use App\Http\Controllers\employeeServiceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\PreOrderController;
 use App\Http\Controllers\stockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -101,6 +102,6 @@ Route::get('stock/count/{cid}',[stockController::class,
 Route::get('/stock/{id}',[stockController::class,
 'getstockByID']);
 
-
+Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 
 
