@@ -90,7 +90,7 @@ Route::post('/points',[customerServiceController::class,'points']);
 
 Route::get('/stock',[stockController::class,'get']);
 
-Route::post('/stock',[stockController::class,'create']);
+Route::post('/stock/create',[stockController::class,'create']);
 
 Route::get('/getstock',[stockController::class,
 'getstock']);
