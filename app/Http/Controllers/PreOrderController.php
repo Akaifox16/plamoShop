@@ -38,4 +38,10 @@ class PreOrderController extends Controller
             return response(["success" => false, "message" => $e],422);
         }
     }
+
+    public function getLast($id){
+        $preorder = DB::table('preorders')->get()->last();
+        return response(['orders'=>$preorder]);
+    }
+
 }
