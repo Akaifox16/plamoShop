@@ -126,6 +126,11 @@ Route::get('/product-line/{type}',[catalogController::class,
 Route::post('/preorder/create/{id}',[PreOrderController::class,'create']);
 
 
+Route::post('/order-address/{oid}',[OrderController::class,
+'createOrderAddress']);
+
+
 Route::delete('/product/del/{id}',[ProductController::class,'del']);
 
 Route::get('/get-last-preorder',[PreOrderController::class,'getLast']);
+
