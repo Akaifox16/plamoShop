@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReqdetailpreOrder extends FormRequest
+class Reqproduct extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,15 @@ class ReqdetailpreOrder extends FormRequest
     public function rules()
     {
         return [
-            'productCode'=>'required',
-            'preorderQuantity'=> 'required'
+            'productCode' => 'required',
+            'productName'=> 'required',
+            'productLine' => 'required',
+            'productScale'=> 'required',
+            'productVendor'=> 'required',
+            'productDescription' => 'required',
+            'quantityInStock' => 'required',
+            'buyPrice' => 'required',
+            'MSRP'=> 'required'
         ];
     }
 }
