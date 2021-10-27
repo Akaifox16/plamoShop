@@ -1,6 +1,0 @@
-@hostname   = http://127.0.0.1/
-@port       = 8000
-@host       = {{hostname}}:{{port}}/api
-
-###
-GET {{host}}/customers HTTP/1.1
