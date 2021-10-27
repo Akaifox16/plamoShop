@@ -108,3 +108,7 @@ Route::get('/stock/{id}',[stockController::class,
 Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 
 Route::get('/product/{id}',[ProductController::class,'getproductByID']);
+
+Route::post('/product/create',[ProductController::class,'create']);
+
+Route::post('/product/{id}/edit',[ProductController::class,'edit']);
