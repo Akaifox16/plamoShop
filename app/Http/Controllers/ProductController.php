@@ -62,4 +62,27 @@ class ProductController extends Controller
         }
         return response(['success'=>false,'error'=>'[required]content-type: json'],204);
     }
+
+    public function del($id){
+        $count = products::get()->count();
+        if($count>1){
+            $del = products::find($id);
+            $cid = $del->product->productNumber;
+            $del->delete();
+            $productCode = products::where('productCode',$cid)->get();
+            $i = 1;
+            foreach($productCode as $prd){
+                DB::table('products')
+                ->where('productCode',$cid)
+                ->update([
+                    "productCode" => $i
+                ]);
+                $i++;
+        }
+        return response(['data'=>$del],200);
+    }
+
+    return response(['error'=>"productCode required"],204);
+    }
+
 }

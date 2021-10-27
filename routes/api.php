@@ -112,3 +112,5 @@ Route::get('/product/{id}',[ProductController::class,'getproductByID']);
 Route::post('/product/create',[ProductController::class,'create']);
 
 Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
+
+Route::delete('/product/del/{id}',[ProductController::class,'del']);
