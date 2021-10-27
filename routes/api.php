@@ -109,4 +109,6 @@ Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 
 Route::get('/product/{id}',[ProductController::class,'getproductByID']);
 
+Route::post('/product/create',[ProductController::class,'create']);
+
 Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
