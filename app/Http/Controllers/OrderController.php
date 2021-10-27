@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\orderPaymentReq;
 use App\Models\orders;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +19,21 @@ class OrderController extends Controller
     public function getDetails($id){
         $orderDetails = orders::find($id)->orderDetails()->get(['productCode','quantityOrdered','priceEach','orderLineNumber']);
         return response(['orderDetails'=> $orderDetails]);
+    }
+
+    public function updatePayment(orderPaymentReq $req){
+        $validate = $req->validated();
+        try{
+            $paymentNumber = $validate['checkNumber'];
+            DB::table('orders')->where('orderNumber',$validate['orderNumber'])
+            ->update([
+                'paymentNumber' => $paymentNumber
+            ]);
+
+            return response(["message" => "Update successfully", $paymentNumber]);
+        }catch(Exception $e){
+            return response($e,422);
+        }
     }
 
     public function create(Request $request, $id){

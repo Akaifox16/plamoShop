@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\stock_in;
 use App\Http\Requests\stockReq;
+use App\Models\products;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use function PHPUnit\Framework\isNan;
+use function PHPUnit\Framework\isNull;
 
 class stockController extends Controller
 {
@@ -32,17 +36,20 @@ class stockController extends Controller
  
     public function create(stockReq $req){
         $validate = $req->validated();
-        $timestamp = date('d-m-Y H:i:s');
         try{
-            DB::table('stock_in')->insert([
-                "productCode"=> $validate ['productCode'],
-                "qty"=> $validate ['qty'],
-                "created_at"=> $timestamp,
-                "update_at"=> $timestamp          
-            ]);
-            DB::table('products')->update([
-                "quantityInStocks" => + $validate ['quantityInStock']
-            ]);
+            $id = $validate['productCode'];
+            $stock = new stock_in();
+            $stock->qty = $validate['qty'];
+            $stock->productCode = $id;
+            $stock->save();
+
+            $product = products::where('productCode',$id);
+            if(!isNull($product)){
+                $total = $product->quantityInStocks + $validate['qty'];
+                products::where('productCode',$id)->update([
+                    "quantityInStocks" => $total
+                ]);
+            }
             
             return response(['success'=>true,'data'=>"Add the product successfully",'insert'=>$validate],201);
         }catch(Exception $e){

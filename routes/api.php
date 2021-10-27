@@ -56,6 +56,8 @@ Route::prefix('order')->group(function ()
     'create']);
     Route::patch('/update/{oid}',[OrderController::class,
     'update']);
+    Route::patch('/update-payment',[OrderController::class,
+    'updatePayment']);
 });
 
 // routing path {localhost}/api/customer/.
@@ -86,7 +88,7 @@ Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
-Route::post('/points',[customerServiceController::class,'points']);
+Route::patch('/points',[customerServiceController::class,'points']);
 
 //stock access api
 
