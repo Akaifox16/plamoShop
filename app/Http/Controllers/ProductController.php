@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\productReq;
+use App\Http\Requests\quantityReq;
 use App\Models\products;
 use Exception;
 use Illuminate\Http\Request;
@@ -35,6 +36,25 @@ class ProductController extends Controller
 
         }catch(Exception $e){
             return response(['success'=>false,'data'=>"Missing requiremet"],422);
+        }
+    }
+
+    public function editList(Request $req){
+        try{
+            foreach ($req->input('orderDetails') as $order) {
+                $code = $order['productCode'];
+                $qty = $order['quantityOrdered'];
+                $stock = products::where('productCode',$code)->get(['quantityInStock'])->first()->quantityInStock;
+
+                DB::table('products')
+                ->where('productCode',$code)
+                ->update([
+                    'quantityInStock' => $stock - $qty
+                ]);
+            }
+            return response('Patching Successfully');
+        }catch(Exception $e){
+            return response($e);
         }
     }
 

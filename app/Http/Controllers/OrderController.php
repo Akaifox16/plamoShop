@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function get($cid){
-        $orders = orders::where('customerNumber',$cid)->get(['orderNumber','orderDate','requiredDate','shippedDate','status','comments','paymentNumber'])
-                    ;
+        $orders = orders::where('customerNumber',$cid)->get(['orderNumber','orderDate','requiredDate','shippedDate','status','comments','paymentNumber']);
         return response(['orders'=>$orders]);
     }
 
