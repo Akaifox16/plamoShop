@@ -17,7 +17,7 @@ class PreOrderController extends Controller
             $customer = DB::table('preorders')
                         ->where('customerNumber',$cusID)
                         ->get();
-            return $customer;
+            return response(['preorder'=>$customer]);
         }catch(Exception $e){
             return response(["success" => false, "message" => $e],422);
         }
