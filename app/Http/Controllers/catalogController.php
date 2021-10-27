@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class catalogController extends Controller
 {
     public function filter(){
-        $results = products::all();
+        $results = DB::table('products')->get();
         return $results;
     }
 

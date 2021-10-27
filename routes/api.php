@@ -53,6 +53,8 @@ Route::prefix('order')->group(function ()
     'getDetails']);
     Route::post('/create/{id}',[OrderController::class,
     'create']);
+    Route::post('/create-details',[OrderController::class,
+    'createDetails']);
     Route::patch('/update/{oid}',[OrderController::class,
     'update']);
     Route::patch('/update-payment',[OrderController::class,
@@ -107,6 +109,8 @@ Route::prefix('stock')->group(function (){
 });
 
 Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
+Route::get('/get-last-order',[OrderController::class,
+'getLast']);
 
 Route::get('/product-line/{type}',[catalogController::class,
 'getImg']);
