@@ -84,6 +84,8 @@ Route::get('/customers/{eid}',[employeeServiceController::class,
 
 Route::get('/catalog',[catalogController::class,'filter']);
 
+Route::get('/catalog/noquantity',[catalogController::class,'getnoQty']);
+
 Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);

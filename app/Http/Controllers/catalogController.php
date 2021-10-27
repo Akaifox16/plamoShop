@@ -15,4 +15,13 @@ class catalogController extends Controller
         "));
         return $results;
     }
+
+    public function getnoQty(){
+        $results = DB::select(DB::raw("
+        SELECT  *
+        FROM    products WHERE quantityInStock == 0
+        "));
+        return $results;
+    }
+
 }
