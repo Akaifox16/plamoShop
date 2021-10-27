@@ -128,4 +128,4 @@ Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
 
 Route::delete('/product/del/{id}',[ProductController::class,'del']);
 
-Route::get('/get-lastl-preorder',[PreOrderController::class,'getLast']);
+Route::get('/get-last-preorder',[PreOrderController::class,'getLast']);

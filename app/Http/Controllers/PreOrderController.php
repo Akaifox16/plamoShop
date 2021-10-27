@@ -39,7 +39,7 @@ class PreOrderController extends Controller
         }
     }
 
-    public function getLast($id){
+    public function getLast(){
         $preorder = DB::table('preorders')->get()->last();
         return response(['preorders'=>$preorder]);
     }
