@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\productReq;
 use App\Http\Requests\quantityReq;
+use App\Http\Requests\Reqproduct;
+use App\Models\preorders;
 use App\Models\products;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class ProductController extends Controller
     return response(['product'=>$product]);
     }
 
-    public function create(productReq $req){
+    public function create(Reqproduct $req){
         $validate = $req->validated();
         try{
             DB::table('products')->insert([
@@ -82,7 +84,8 @@ class ProductController extends Controller
     }
 
     public function del($id){
-            DB::table('products')->where('productCode',$id)->delete();
+            $del = products::find($id);
+            $del->delete();
         return response(['success'=> true ,'data'=>$id],200);
     }
 
