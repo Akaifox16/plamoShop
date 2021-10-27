@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\productReq;
+use App\Http\Requests\Reqproduct;
 use App\Models\products;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
 {
@@ -16,7 +18,7 @@ class ProductController extends Controller
     return response(['product'=>$product]);
     }
 
-    public function create(productReq $req){
+    public function create(Reqproduct $req){
         $validate = $req->validated();
         try{
             DB::table('products')->insert([
