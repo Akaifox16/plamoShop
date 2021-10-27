@@ -54,6 +54,8 @@ Route::prefix('order')->group(function ()
     'getDetails']);
     Route::post('/create/{id}',[OrderController::class,
     'create']);
+    Route::post('/create-details',[OrderController::class,
+    'createDetails']);
     Route::patch('/update/{oid}',[OrderController::class,
     'update']);
     Route::patch('/update-payment',[OrderController::class,
@@ -101,14 +103,21 @@ Route::post('/stock/create',[stockController::class,'create']);
 Route::get('/getstock',[stockController::class,
 'getstock']);
 
-Route::get('stock/count/{cid}',[stockController::class,
-'count']);
-
-Route::get('/stock/{id}',[stockController::class,
-'getstockByID']);
+Route::prefix('stock')->group(function (){
+    Route::get('/count/{cid}',[stockController::class,
+    'count']);
+    
+    Route::get('/{id}',[stockController::class,
+    'getstockByID']);
+});
 
 Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
+Route::get('/get-last-order',[OrderController::class,
+'getLast']);
 
+
+Route::get('/product-line/{type}',[catalogController::class,
+'getImg']);
 Route::get('/product/{id}',[ProductController::class,'getproductByID']);
 
 Route::post('/product/create',[ProductController::class,'create']);
