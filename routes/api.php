@@ -87,7 +87,7 @@ Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
-Route::post('/points',[customerServiceController::class,'points']);
+Route::patch('/points',[customerServiceController::class,'points']);
 
 //stock access api
 

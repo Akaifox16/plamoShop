@@ -27,7 +27,6 @@ class OrderController extends Controller
             $paymentNumber = $validate['checkNumber'];
             DB::table('orders')->where('orderNumber',$validate['orderNumber'])
             ->update([
-                'status' => 'Shipped',
                 'paymentNumber' => $paymentNumber
             ]);
 
