@@ -38,7 +38,18 @@ class employeeServiceController extends Controller
     }
 
     public function create(Request $req , $id){
-        
+        $no = DB::table('customers')->get()->last()->customerNumber +1;
+        DB::table('customers')->insert([
+            'customerNumber' => $no,
+            'customerName' => $req->input('customerName'),
+            'contactLastName' => $req->input('contactLastName'),
+            'contactFirstName' => $req->input('contactFirstName'),
+            'phone' => $req->input('phone'),
+            'salesRepEmployeeNumber' => $id,
+            'points' => 0
+        ]);
+        $customer = DB::table('customers')->where('customerNumber',$no)->get();
+        return response($customer);
     }
 
     public function promote(Reqpromote $req){
