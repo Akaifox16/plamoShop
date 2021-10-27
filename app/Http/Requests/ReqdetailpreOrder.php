@@ -24,7 +24,6 @@ class ReqdetailpreOrder extends FormRequest
     public function rules()
     {
         return [
-            'customerNumber' => 'required',
             'productCode'=>'required',
             'preorderQuantity'=> 'required'
         ];

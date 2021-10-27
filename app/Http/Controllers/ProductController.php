@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\productReq;
 use App\Http\Requests\Reqproduct;
+use App\Models\preorders;
 use App\Models\products;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 
 class ProductController extends Controller
 {
@@ -64,7 +64,8 @@ class ProductController extends Controller
     }
 
     public function del($id){
-            DB::table('products')->where('productCode',$id)->delete();
+            $del = products::find($id);
+            $del->delete();
         return response(['success'=> true ,'data'=>$id],200);
     }
 

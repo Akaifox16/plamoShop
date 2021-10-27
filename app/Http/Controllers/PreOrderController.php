@@ -7,6 +7,7 @@ use App\Http\Requests\ReqpreOrder;
 use App\Models\preorders;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,29 +26,15 @@ class PreOrderController extends Controller
         }
     }
 
-    public function createPreOrder(ReqdetailpreOrder $req){
+    public function create(ReqdetailpreOrder $req, $id){
         $validated = $req->validated();
-        try{
-            preorders::insert([
-                'orderDate' => now(),
-                'customerNumber' => $validated['customerNumber'],
-                'productCode' => $validated['productCode'],
-                'preorderQuantity' => $validated['preorderQuantity']
-            ]);
-            return response(["success" => true, "message" => "add successful"]);
-        }catch(Exception $e){
-            return response(["success" => false, "message" => $e],422);
-        }
-    }
-
-    public function create(Request $request, $id){
         DB::table('preorders')->insert([ 
             'orderDate' => Carbon::now()->toDate(),
             'customerNumber' => $id,
-            'productCode' => $request->input('productCode'),
-            'preorderQuantity' => $request->input('preorderQuantity')
+            'productCode' => $validated['productCode'],
+            'preorderQuantity' => $validated['preorderQuantity']
         ]);
-        return response($request->input('preorder'));
+        return response(['createPreorder'=>$validated]);
     }
 
 

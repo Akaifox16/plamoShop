@@ -124,9 +124,7 @@ Route::post('/product/create',[ProductController::class,'create']);
 
 Route::patch('/product/update/{id}',[ProductController::class,'edit']);
 
-Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
-
-Route::post('/preorder/create',[PreOrderController::class,'create']);
+Route::post('/preorder/create/{id}',[PreOrderController::class,'create']);
 
 Route::delete('/product/del/{id}',[ProductController::class,'del']);
 
