@@ -14,9 +14,19 @@ class catalogController extends Controller
         return $results;
     }
 
+
     public function getImg($type){
         $res = productlines::where('productLine',$type)
         ->get(['image']);
         return response($res);
     }
+
+    public function getnoQty(){
+        $results = DB::select(DB::raw("
+        SELECT  *
+        FROM    products WHERE quantityInStock = 0
+        "));
+        return $results;
+    }
+
 }

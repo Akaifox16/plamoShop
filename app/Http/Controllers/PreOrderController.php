@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReqdetailpreOrder;
 use App\Http\Requests\ReqpreOrder;
 use App\Models\preorders;
 use Exception;
@@ -17,7 +18,22 @@ class PreOrderController extends Controller
             $customer = DB::table('preorders')
                         ->where('customerNumber',$cusID)
                         ->get();
-            return $customer;
+            return response(['preorder'=>$customer]);
+        }catch(Exception $e){
+            return response(["success" => false, "message" => $e],422);
+        }
+    }
+
+    public function createPreOrder(ReqdetailpreOrder $req){
+        $validated = $req->validated();
+        try{
+            preorders::insert([
+                'orderDate' => now(),
+                'customerNumber' => $validated['customerNumber'],
+                'productCode' => $validated['productCode'],
+                'preorderQuantity' => $validated['preorderQuantity']
+            ]);
+            return response(["success" => true, "message" => "add successful"]);
         }catch(Exception $e){
             return response(["success" => false, "message" => $e],422);
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\loginController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\paymentController;
 use App\Http\Controllers\PreOrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\stockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -85,6 +86,8 @@ Route::get('/customers/{eid}',[employeeServiceController::class,
 
 Route::get('/catalog',[catalogController::class,'filter']);
 
+Route::get('/catalog/noquantity',[catalogController::class,'getnoQty']);
+
 Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
@@ -112,5 +115,15 @@ Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 Route::get('/get-last-order',[OrderController::class,
 'getLast']);
 
+
 Route::get('/product-line/{type}',[catalogController::class,
 'getImg']);
+Route::get('/product/{id}',[ProductController::class,'getproductByID']);
+
+Route::post('/product/create',[ProductController::class,'create']);
+
+Route::patch('/product/update/{id}',[ProductController::class,'edit']);
+
+Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
+
+Route::delete('/product/del/{id}',[ProductController::class,'del']);
