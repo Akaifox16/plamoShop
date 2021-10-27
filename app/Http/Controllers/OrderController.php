@@ -79,4 +79,17 @@ class OrderController extends Controller
             'comments'      => $req->input('comments')
         ]);
     }
+
+    public function createOrderAddress(Request $req,$oid){
+        DB::table('ordershippedaddress')
+        ->insert([
+            'ordernumber' => $oid,
+            'addressLine1' => $req->input('AddressLine1'),
+            'addressLine2' => $req->input('AddressLine2'),
+            'city' => $req->input('City'),
+            'state' => $req->input('State'),
+            'postalCode' => $req->input('PostalCode'),
+            'country' => $req->input('Country')
+        ]);
+    }
 }
