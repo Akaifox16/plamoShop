@@ -83,7 +83,6 @@ Route::get('/employee/{id}',[employeeServiceController::class,
 Route::get('/customers/{eid}',[employeeServiceController::class,
 'getByID']);
 
-
 Route::get('/catalog',[catalogController::class,'filter']);
 
 Route::get('/catalog/noquantity',[catalogController::class,'getnoQty']);
@@ -92,39 +91,40 @@ Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
+Route::prefix('product',function (){
+    Route::get('/{id}',[ProductController::class,'getproductByID']);
+    Route::post('/create',[ProductController::class,'create']);
+    Route::patch('/update/{id}',[ProductController::class,'edit']);
+    Route::delete('/del/{id}',[ProductController::class,'del']);
+});
+
+Route::patch('/product/updateList',[ProductController::class,
+'editList']);
 Route::patch('/points',[customerServiceController::class,'points']);
 
 //stock access api
 
-Route::get('/stock',[stockController::class,'get']);
-
-Route::post('/stock/create',[stockController::class,'create']);
-
-Route::get('/getstock',[stockController::class,
-'getstock']);
-
 Route::prefix('stock')->group(function (){
+    Route::get('/',[stockController::class,'get']);
     Route::get('/count/{cid}',[stockController::class,
     'count']);
-    
+    Route::post('/create',[stockController::class,'create']);
     Route::get('/{id}',[stockController::class,
     'getstockByID']);
 });
+
+Route::get('/getstock',[stockController::class,
+'getstock']);
 
 Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 Route::get('/get-last-order',[OrderController::class,
 'getLast']);
 
-
 Route::get('/product-line/{type}',[catalogController::class,
 'getImg']);
-Route::get('/product/{id}',[ProductController::class,'getproductByID']);
-
-Route::post('/product/create',[ProductController::class,'create']);
-
-Route::patch('/product/update/{id}',[ProductController::class,'edit']);
 
 Route::post('/preorder/create/{id}',[PreOrderController::class,'create']);
+
 
 Route::delete('/product/del/{id}',[ProductController::class,'del']);
 
