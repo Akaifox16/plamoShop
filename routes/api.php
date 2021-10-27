@@ -98,12 +98,15 @@ Route::post('/stock/create',[stockController::class,'create']);
 Route::get('/getstock',[stockController::class,
 'getstock']);
 
-Route::get('stock/count/{cid}',[stockController::class,
-'count']);
-
-Route::get('/stock/{id}',[stockController::class,
-'getstockByID']);
+Route::prefix('stock')->group(function (){
+    Route::get('/count/{cid}',[stockController::class,
+    'count']);
+    
+    Route::get('/{id}',[stockController::class,
+    'getstockByID']);
+});
 
 Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
 
-
+Route::get('/product-line/{type}',[catalogController::class,
+'getImg']);
