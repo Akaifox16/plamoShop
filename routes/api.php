@@ -126,6 +126,8 @@ Route::patch('/product/update/{id}',[ProductController::class,'edit']);
 
 Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
 
+Route::post('/preorder/create',[PreOrderController::class,'create']);
+
 Route::delete('/product/del/{id}',[ProductController::class,'del']);
 
 Route::get('/get-last-preorder',[PreOrderController::class,'getLast']);

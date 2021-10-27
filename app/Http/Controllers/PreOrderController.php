@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReqdetailpreOrder;
 use App\Http\Requests\ReqpreOrder;
 use App\Models\preorders;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,6 +39,17 @@ class PreOrderController extends Controller
             return response(["success" => false, "message" => $e],422);
         }
     }
+
+    public function create(Request $request, $id){
+        DB::table('preorders')->insert([ 
+            'orderDate' => Carbon::now()->toDate(),
+            'customerNumber' => $id,
+            'productCode' => $request->input('productCode'),
+            'preorderQuantity' => $request->input('preorderQuantity')
+        ]);
+        return response($request->input('preorder'));
+    }
+
 
     public function getLast(){
         $preorder = DB::table('preorders')->get()->last();
