@@ -43,15 +43,13 @@ class stockController extends Controller
             $stock->productCode = $id;
             $stock->save();
 
-            $product = products::where('productCode',$id);
-            if(!isNull($product)){
-                $total = $product->quantityInStocks + $validate['qty'];
-                products::where('productCode',$id)->update([
-                    "quantityInStocks" => $total
+            $product = DB::table('products')->where('productCode',$id)->get()->first();
+                $total = $product->quantityInStock + $validate['qty'];
+                DB::table('products')->where('productCode',$id)->update([
+                    "quantityInStock" => $total
                 ]);
-            }
-            
             return response(['success'=>true,'data'=>"Add the product successfully",'insert'=>$validate],201);
+            
         }catch(Exception $e){
             return response(['success'=>false,'insert'=>"Missing requirement"],422);
         }

@@ -91,9 +91,10 @@ Route::post('/payment',[paymentController::class,'insert']);
 
 Route::post('/promote',[employeeServiceController::class,'promote']);
 
+Route::get('product/{id}',[ProductController::class,'getproductByID']);
+
+Route::post('/product/create',[ProductController::class,'create']);
 Route::prefix('product',function (){
-    Route::get('/{id}',[ProductController::class,'getproductByID']);
-    Route::post('/create',[ProductController::class,'create']);
     Route::patch('/update/{id}',[ProductController::class,'edit']);
     Route::delete('/del/{id}',[ProductController::class,'del']);
 });
