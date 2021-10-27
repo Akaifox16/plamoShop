@@ -40,22 +40,20 @@ class ProductController extends Controller
 
     public function edit(productReq $req,$productCode){
         if($req->accepts('application/json')){
-            $validate = $req->validated();
+            $validated = $req->validated();
             try{
                 DB::table('products')->where('productCode',$productCode)
                 ->update([
-                    'productCode'=> $validate['productCode'],
-                    'productName'=> $validate['productName'],
-                    'productLine'=> $validate['productLine'],
-                    'productScale'=> $validate['productScale'],
-                    'productVendor'=> $validate['productVendor'],
-                    'productDescription' => $validate['productDescription'],
-                    'quantityInStock' => $validate['quantityInStock'],
-                    'buyPrice' => $validate['buyPrice'],
-                    'MSRP'=> $validate['MSRP']
+                    'productName'           => $validated['productName'],
+                    'productScale'          => $validated['productScale'],
+                    'productVendor'         => $validated['productVendor'],
+                    'productDescription'    => $validated['productDescription'],
+                    'quantityInStock'       => $validated['quantityInStock'],
+                    'buyPrice'              => $validated['buyPrice'],
+                    'MSRP'                  => $validated['MSRP']
                 ]);
 
-                return response(['success'=>true,'data'=>$validate],200);
+                return response(['success'=>true,'data'=>$validated],200);
             }catch(Exception $e){
                 return response(['success'=>false,'error'=>$e],204);
             }
