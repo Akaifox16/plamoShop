@@ -125,3 +125,5 @@ Route::get('/product-line/{type}',[catalogController::class,
 
 Route::post('/add_preorder',[PreOrderController::class,'createPreOrder']);
 
+Route::post('/order-address/{oid}',[OrderController::class,
+'createOrderAddress']);
