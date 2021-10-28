@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function getproductByID($id){
-        $product = products::where('productCode',$id)
+        $product = DB::table('products')->where('productCode',$id)
                     ->get();
     return response(['product'=>$product]);
     }
