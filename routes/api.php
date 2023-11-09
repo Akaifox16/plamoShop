@@ -24,11 +24,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+|=================================
+| Authentication
+|================================
+*/
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/signup',[loginController::class,
+'signup']);
+Route::post('/login',[loginController::class,
+'login']);
 
-// routing path {localhost}/api/address/.
+/*
+|=================================
+| Address
+|================================
+*/
 Route::prefix('address')->group(function ()
 {
     Route::get('/{cid}',[AddressController::class,
@@ -42,10 +55,14 @@ Route::prefix('address')->group(function ()
     Route::patch('/update/{id}',[AddressController::class,
     'edit']);
     Route::delete('/del/{id}',[AddressController::class,
-    'del']);    
+    'del']);
 });
 
-// routing path {localhost}/api/order/.
+/*
+|=================================
+| Order
+|================================
+*/
 Route::prefix('order')->group(function ()
 {
     Route::get('/{cid}',[OrderController::class,
@@ -61,50 +78,117 @@ Route::prefix('order')->group(function ()
     Route::patch('/update-payment',[OrderController::class,
     'updatePayment']);
 });
+Route::get('/get-last-order',[OrderController::class,
+'getLast']);
+Route::post('/order-address/{oid}',[OrderController::class,
+'createOrderAddress']);
 
-// routing path {localhost}/api/customer/.
+/*
+|=================================
+| Customer
+|================================
+*/
 Route::prefix('customer')->group(function ()
-{
-    Route::post('/create/{id}',[employeeServiceController::class,
+{ Route::post('/create/{id}',[employeeServiceController::class,
     'create']);
 });
+Route::prefix('customers')->(function ()
+{
+    Route::get('/',[employeeServiceController::class,
+    'get']);
+    Route::get('/{eid}',[employeeServiceController::class,
+    'getByID']);
+})
 
-Route::post('/signup',[loginController::class,
-'signup']);
-Route::post('/login',[loginController::class,
-'login']);
 
-Route::get('/customers',[employeeServiceController::class,
-'get']);
+/*
+|=================================
+| Employee
+|================================
+*/
 Route::get('/employees',[employeeServiceController::class,
 'getEmployee']);
-Route::get('/employee/{id}',[employeeServiceController::class,
-'getEmployeeByID']);
-Route::get('/customers/{eid}',[employeeServiceController::class,
-'getByID']);
+Route::prefix('employee')->group(function ()
+{
+    Route::get('/{id}',[employeeServiceController::class,
+    'getEmployeeByID']);
+})
 
-Route::get('/catalog',[catalogController::class,'filter']);
 
-Route::get('/catalog/noquantity',[catalogController::class,'getnoQty']);
+/*
+|=================================
+| Catalog
+|================================
+*/
+Route::prefix('catalog')->group(function ()
+{
+    Route::get('/',[catalogController::class,'filter']);
+    Route::get('/noquantity',[catalogController::class,'getnoQty']);
+})
 
-Route::post('/payment',[paymentController::class,'insert']);
+/*
+|=================================
+| Payment
+|================================
+*/
+Route::prefix('payment')->group(function ()
+{
+    Route::post('/',[paymentController::class,'insert']);
+})
 
-Route::post('/promote',[employeeServiceController::class,'promote']);
+/*
+|=================================
+| Promote
+|================================
+*/
+Route::prefix('promote')->group(function ()
+{
+    Route::post('/',[employeeServiceController::class,'promote']);
+})
 
-Route::get('product/{id}',[ProductController::class,'getproductByID']);
-
-Route::post('/product/create',[ProductController::class,'create']);
+/*
+|=================================
+| Product
+|================================
+*/
 Route::prefix('product',function (){
     Route::patch('/update/{id}',[ProductController::class,'edit']);
     Route::delete('/del/{id}',[ProductController::class,'del']);
+    Route::get('/{id}',[ProductController::class,'getproductByID']);
+    Route::post('/create',[ProductController::class,'create']);
+    Route::patch('/updateList',[ProductController::class,
+    'editList']);
 });
+Route::get('/product-line/{type}',[catalogController::class,
+'getImg']);
 
-Route::patch('/product/updateList',[ProductController::class,
-'editList']);
-Route::patch('/points',[customerServiceController::class,'points']);
+/*
+|=================================
+| Point
+|================================
+*/
+Route::prefix('points')->group(function ()
+{
+    Route::patch('/',[customerServiceController::class,'points']);
+})
 
-//stock access api
+/*
+|=================================
+| Preorder
+|================================
+*/
+Route::prefix('preorder')->group(function ()
+{
+    Route::get('/',[PreOrderController::class,'getPreOrder']);
+    Route::post('/create/{id}',[PreOrderController::class,'create']);
+})
+Route::get('/get-last-preorder',[PreOrderController::class,'getLast']);
 
+/*
+|=================================
+| Stocks
+|================================
+*/
 Route::prefix('stock')->group(function (){
     Route::get('/',[stockController::class,'get']);
     Route::get('/count/{cid}',[stockController::class,
@@ -113,25 +197,6 @@ Route::prefix('stock')->group(function (){
     Route::get('/{id}',[stockController::class,
     'getstockByID']);
 });
-
 Route::get('/getstock',[stockController::class,
 'getstock']);
-
-Route::get('/preorder',[PreOrderController::class,'getPreOrder']);
-Route::get('/get-last-order',[OrderController::class,
-'getLast']);
-
-Route::get('/product-line/{type}',[catalogController::class,
-'getImg']);
-
-Route::post('/preorder/create/{id}',[PreOrderController::class,'create']);
-
-
-Route::post('/order-address/{oid}',[OrderController::class,
-'createOrderAddress']);
-
-
-Route::delete('/product/del/{id}',[ProductController::class,'del']);
-
-Route::get('/get-last-preorder',[PreOrderController::class,'getLast']);
 
